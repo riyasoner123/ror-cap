@@ -4,7 +4,7 @@ lock "~> 3.18.0"
 set :application, 'demo'
 set :repo_url, 'git@github.com:riyasoner123/ror-cap.git' # should match git repo
 set :branch, :main
-set :deploy_to, '/home/demo/demo'
+set :deploy_to, '/home/ubuntu/demo'
 set :pty, true
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
