@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 gem 'capistrano', require: false
-gem 'capistrano-rbenv'
+gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano-rails'
 gem 'capistrano-puma'
@@ -12,6 +12,7 @@ gem 'rails', '~> 6.1.7', '>= 6.1.7.7'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 gem 'pg'
+gem 'rake', '13.1.0'
 
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
@@ -30,6 +31,7 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -56,6 +58,7 @@ group :test do
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
