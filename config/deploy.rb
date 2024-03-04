@@ -14,6 +14,10 @@ set :rvm_ruby_version, 'ruby-3.0.0'
 set :default_env, {
    'PATH' => "$HOME/.rvm/bin:$PATH"
 }
+set :default_env, {
+  'SECRET_KEY_BASE' => '7ebc1eec6b2fabb2dc317c075f293e008b1e6c2f53ca02b5961b8f6474d6a975c4a3e4a437cb6c41e14768f47ae5f03b513d350ab39f38b1d39e82dde9a9c796'
+}
+
 # Puma configuration
 set :puma_rackup, -> { File.join(current_path, 'config.ru') }
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"

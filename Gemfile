@@ -14,6 +14,7 @@ gem 'sqlite3', '~> 1.4'
 gem 'pg'
 gem 'rake', '13.1.0'
 
+
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
