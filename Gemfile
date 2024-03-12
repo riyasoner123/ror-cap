@@ -2,19 +2,11 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
-gem 'capistrano', require: false
-gem 'capistrano-rvm'
-gem 'capistrano-bundler'
-gem 'capistrano-rails'
-gem 'capistrano-puma'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.7'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 gem 'pg'
-gem 'rake', '13.1.0'
-
-
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -51,6 +43,12 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
+  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
+
+
 end
 
 group :test do

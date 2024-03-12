@@ -59,19 +59,5 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-server '13.201.115.187', user: 'ubuntu', roles: %w{web app db}
+server '13.201.88.137', user: 'ubuntu', roles: %w{web app db}
 
-namespace :deploy do
-  desc 'Run webpacker:install'
-  task :webpacker_install do
-    on roles(:app) do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, 'webpacker:install'
-        end
-      end
-    end
-  end
-end
-
-after 'deploy:published', 'deploy:webpacker_install'
