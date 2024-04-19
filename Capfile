@@ -34,8 +34,7 @@ require "capistrano/bundler"
 require "capistrano/rails/migrations"
 require 'capistrano/puma'
 #require "capistrano/passenger"
-install_plugin Capistrano::Puma , load_hooks: true
-# install_plugin Capistrano::Puma::Systemd
+#install_plugin Capistrano::Puma 
 
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
