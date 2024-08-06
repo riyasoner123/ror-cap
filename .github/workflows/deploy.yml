@@ -21,6 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          gem install bundler -v '2.3.26'
           bundle install
           yarn install
 
