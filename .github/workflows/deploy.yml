@@ -1,0 +1,37 @@
+name: Auto Deploy with Capistrano
+
+on:
+  push:
+    branches: [ main ] # Specify the branch to trigger deployment
+
+jobs:
+  deploy:
+    name: Capistrano Deploy to Private Server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3 # Checkout the code from the repository
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v2
+        with:
+          ruby-version: '3.0.0' # Specify the Ruby version used in your Rails application
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          bundle install
+          yarn install
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.PUBLIC_SERVER_IP }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to public server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -o StrictHostKeyChecking=no -T ${{ secrets.PUBLIC_SSH_USER }}@${{ secrets.PUBLIC_SERVER_IP }} "ssh -o StrictHostKeyChecking=no -T ${{ secrets.PRIVATE_SSH_USER }}@${{ secrets.PRIVATE_SERVER_IP }} 'cd /home/ubuntu/demo && bundle exec cap production deploy'"
