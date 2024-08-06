@@ -19,11 +19,6 @@ jobs:
           ruby-version: '3.0.0' # Specify the Ruby version used in your Rails application
           bundler-cache: true
 
-      - name: Install dependencies
-        run: |
-          gem install bundler -v '2.3.26'
-          bundle install
-          yarn install
 
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.PUBLIC_SERVER_IP }} >> ~/.ssh/known_hosts
