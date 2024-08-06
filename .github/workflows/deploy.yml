@@ -2,7 +2,7 @@ name: Auto Deploy with Capistrano
 
 on:
   push:
-    branches: [ main ] # Specify the branch to trigger deployment
+    branches: [ main ]
 
 jobs:
   deploy:
@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3 # 
+        uses: actions/checkout@v3
 
       - name: Set up SSH
         run: |
@@ -23,12 +23,8 @@ jobs:
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
 
-
-      - name: Deploy to public server
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Deploy via Bastion Host
         run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh -o StrictHostKeyChecking=no -T ${{ secrets.PUBLIC_SSH_USER }}@${{ secrets.PUBLIC_SERVER_IP }} "ssh -o StrictHostKeyChecking=no -T ${{ secrets.PRIVATE_SSH_USER }}@${{ secrets.PRIVATE_SERVER_IP }} 'cd /home/ubuntu/demo && bundle exec cap production deploy'"
+          ssh -o StrictHostKeyChecking=no -T ${{ secrets.PUBLIC_SSH_USER }}@${{ secrets.PUBLIC_SERVER_IP }} \
+            "ssh -o StrictHostKeyChecking=no -T ${{ secrets.PRIVATE_SSH_USER }}@${{ secrets.PRIVATE_SERVER_IP }} \
+            'cd /home/ubuntu/demo && bundle exec cap production deploy'"
